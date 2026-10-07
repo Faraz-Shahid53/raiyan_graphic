@@ -43,10 +43,10 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon.ico" },
+      { url: "/Raiyan Graphic Blue Ribbon Logo.png", type: "image/svg+xml" },
+      { url: "/Raiyan Graphic Blue Ribbon Logo.png" },
     ],
-    apple: "/favicon.svg",
+    apple: "/Raiyan Graphic Blue Ribbon Logo.png",
   },
 };
 

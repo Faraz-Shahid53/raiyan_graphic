@@ -67,9 +67,11 @@ export default function Header() {
               if (pathname === "/") {
                 // already home: glide back to the hero instead of reloading
                 e.preventDefault();
-                window.__lenis
-                  ? window.__lenis.scrollTo(0, { duration: 1.6 })
-                  : window.scrollTo({ top: 0 });
+                if (window.__lenis) {
+                  window.__lenis.scrollTo(0, { duration: 1.6 });
+                } else {
+                  window.scrollTo({ top: 0 });
+                }
               }
             }}
             className="font-display text-sm font-semibold uppercase tracking-[0.25em]"
@@ -123,9 +125,11 @@ export default function Header() {
 function scrollToId(id: string) {
   const el = document.getElementById(id);
   if (!el) return;
-  window.__lenis
-    ? window.__lenis.scrollTo(el, { offset: -80, duration: 1.8 })
-    : el.scrollIntoView({ behavior: "smooth" });
+  if (window.__lenis) {
+    window.__lenis.scrollTo(el, { offset: -80, duration: 1.8 });
+  } else {
+    el.scrollIntoView({ behavior: "smooth" });
+  }
 }
 
 function MenuOverlay({ goTo }: { goTo: (href: string) => void }) {

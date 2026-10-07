@@ -7,16 +7,21 @@ import { useRevealGroup } from "./Reveal";
 /** Footer: giant wordmark, socials, back-to-top, availability dot. */
 export default function Footer() {
   const ref = useRevealGroup<HTMLElement>();
-  const [year, setYear] = useState<string | null>(null);
+  const [year, setYear] = useState("");
 
   useEffect(() => {
-    setYear(String(new Date().getFullYear()));
+    const raf = requestAnimationFrame(() =>
+      setYear(String(new Date().getFullYear()))
+    );
+    return () => cancelAnimationFrame(raf);
   }, []);
 
   const backToTop = () => {
-    window.__lenis
-      ? window.__lenis.scrollTo(0, { duration: 2.2 })
-      : window.scrollTo({ top: 0, behavior: "smooth" });
+    if (window.__lenis) {
+      window.__lenis.scrollTo(0, { duration: 2.2 });
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   return (
@@ -40,9 +45,11 @@ export default function Footer() {
                       e.preventDefault();
                       const el = document.getElementById(item.href.slice(2));
                       if (el) {
-                        window.__lenis
-                          ? window.__lenis.scrollTo(el, { offset: -80 })
-                          : el.scrollIntoView({ behavior: "smooth" });
+                        if (window.__lenis) {
+                          window.__lenis.scrollTo(el, { offset: -80 });
+                        } else {
+                          el.scrollIntoView({ behavior: "smooth" });
+                        }
                       }
                     }
                   }}
