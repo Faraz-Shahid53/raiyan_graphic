@@ -26,9 +26,11 @@ export default function PageTransition({
     const timer = setTimeout(() => {
       const el = document.getElementById(pending);
       if (!el) return;
-      window.__lenis
-        ? window.__lenis.scrollTo(el, { offset: -80, duration: 1.8 })
-        : el.scrollIntoView();
+      if (window.__lenis) {
+        window.__lenis.scrollTo(el, { offset: -80, duration: 1.8 });
+      } else {
+        el.scrollIntoView();
+      }
     }, 500);
     return () => clearTimeout(timer);
   }, [restoreScrollKey]);

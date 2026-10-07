@@ -63,10 +63,13 @@ export default function Hero() {
           <MagneticButton
             onClick={() => {
               const el = document.getElementById("contact");
-              if (el)
-                window.__lenis
-                  ? window.__lenis.scrollTo(el, { offset: -80, duration: 2 })
-                  : el.scrollIntoView({ behavior: "smooth" });
+              if (el) {
+                if (window.__lenis) {
+                  window.__lenis.scrollTo(el, { offset: -80, duration: 2 });
+                } else {
+                  el.scrollIntoView({ behavior: "smooth" });
+                }
+              }
             }}
             className="rounded-full bg-accent px-6 py-3.5 text-sm font-medium uppercase tracking-[0.12em] text-bg"
           >

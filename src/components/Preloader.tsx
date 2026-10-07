@@ -27,7 +27,8 @@ export default function Preloader() {
       return;
     }
     sessionStorage.setItem(STORAGE_KEY, "1");
-    setActive(true);
+    const raf = requestAnimationFrame(() => setActive(true));
+    return () => cancelAnimationFrame(raf);
   }, []);
 
   // Runs after the overlay is actually in the DOM (active === true).
